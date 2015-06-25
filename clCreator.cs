@@ -10,14 +10,12 @@ namespace Spotnashki
     {            
         public int[] create_field(int[] array) //Method wich will fill our array by random numbers
         {
-            foreach(int element in array) // Clear all field
-            {
-                array[element] = 99;//Number, which will not break our game, also each numbers from (-infinity;0)U(15;+infinity)
-            }
+            for (int i = 0; i < 16; i++) // Clear all field
+                array[i] = 99;//Number, which will not break our game, also each numbers from (-infinity;0)U(15;+infinity)
 
             Random rand = new Random((int)DateTime.Now.Ticks);// Generator of random numbers
             
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 16; i++)
             {
                 array[i] = rand.Next(0, 16);
 

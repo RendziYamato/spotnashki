@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel = new System.Windows.Forms.Panel();
             this.label = new System.Windows.Forms.Label();
@@ -37,14 +37,15 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(497, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 48);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Начать игру";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStart.Location = new System.Drawing.Point(497, 29);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(154, 48);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "Начать игру";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // button2
             // 
@@ -58,7 +59,7 @@
             // panel
             // 
             this.panel.BackgroundImage = global::Spotnashki.Properties.Resources.background;
-            this.panel.Location = new System.Drawing.Point(32, 29);
+            this.panel.Location = new System.Drawing.Point(30, 30);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(400, 400);
             this.panel.TabIndex = 3;
@@ -92,9 +93,10 @@
             this.Controls.Add(this.label);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
             this.Name = "frmMainScreen";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmMainScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,7 +104,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Label label;
