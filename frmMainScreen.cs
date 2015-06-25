@@ -15,44 +15,146 @@ namespace Spotnashki
     {
         clController Controller = new clController();
 
-        clMain Main = new clMain();//Main class wich will contain all information about game: number of steps, status and field status
+        clField Main = new clField();//Main class wich will contain all information about game: number of steps, status and field status
 
         public frmMainScreen()
         {
             InitializeComponent();
-            Main.Field = Controller.create(Main.Field);//We create new game field in matrix form
+            Controller.create(Main.field);//We create new game field in matrix form
         }
 
         void first_draw()
         {
-            draw(Main.Field);
+            draw(Main.field);
         }
 
-        void draw(int[] array)
+        void draw(int[,] array)
         {
+            
             Graphics game_field = this.panel.CreateGraphics();//For drawing game field
 
-            Bitmap one = new Bitmap(@"pictures\one.bmp");
-            //Bitmap two = new Bitmap(@"figurs\two.bmp");
-            //Bitmap three = new Bitmap(@"figurs\three.bmp");
-            //Bitmap four = new Bitmap(@"figurs\four.bmp");
-            //Bitmap five = new Bitmap(@"figurs\five.bmp");
-            //Bitmap six = new Bitmap(@"figurs\six.bmp");
-            //Bitmap seven = new Bitmap(@"figurs\seven.bmp");
-            //Bitmap eight = new Bitmap(@"figurs\eight.bmp");
-            //Bitmap nine = new Bitmap(@"figurs\nine.bmp");
-            //Bitmap ten = new Bitmap(@"figurs\ten.bmp");
-            //Bitmap eleven = new Bitmap(@"figurs\eleven.bmp");
-            //Bitmap twelve = new Bitmap(@"figurs\twelve.bmp");
-            //Bitmap thirteen = new Bitmap(@"figurs\thirteen.bmp");
-            //Bitmap fourteen = new Bitmap(@"figurs\fourteen.bmp");
-            //Bitmap fivteen = new Bitmap(@"figurs\fivteen.bmp");
+            for (int i = 0, y = 0; i < 4; i++)
+            {
+                y = i * 100;
 
-           // Bitmap temp;
-            game_field.DrawImage(one, 0, 0);
+                for (int j = 0, x = 0; j < 4; j++)
+                {
+                    x = j * 100;
 
-            one.Dispose();
-
+                    switch (array[i, j])
+                    {
+                        case 0:
+                            {
+                                break;
+                            }
+                        case 1:
+                            {
+                                Bitmap one = new Bitmap(@"pictures\one.bmp");
+                                game_field.DrawImage(one, x, y);
+                                one.Dispose();
+                                break;
+                            }
+                        case 2:
+                            {
+                                Bitmap two = new Bitmap(@"pictures\two.bmp");
+                                game_field.DrawImage(two, x, y);
+                                two.Dispose();
+                                break;
+                            }
+                        case 3:
+                            {
+                                Bitmap three = new Bitmap(@"pictures\three.bmp");
+                                game_field.DrawImage(three, x, y);
+                                three.Dispose();
+                                break;
+                            }
+                        case 4:
+                            {
+                                Bitmap four = new Bitmap(@"pictures\four.bmp");
+                                game_field.DrawImage(four, x, y);
+                                four.Dispose();
+                                break;
+                            }
+                        case 5:
+                            {
+                                Bitmap five = new Bitmap(@"pictures\five.bmp");
+                                game_field.DrawImage(five, x, y);
+                                five.Dispose();
+                                break;
+                            }
+                        case 6:
+                            {
+                                Bitmap six = new Bitmap(@"pictures\six.bmp");
+                                game_field.DrawImage(six, x, y);
+                                six.Dispose();
+                                break;
+                            }
+                        case 7:
+                            {
+                                Bitmap seven = new Bitmap(@"pictures\seven.bmp");
+                                game_field.DrawImage(seven, x, y);
+                                seven.Dispose();
+                                break;
+                            }
+                        case 8:
+                            {
+                                Bitmap eight = new Bitmap(@"pictures\eight.bmp");
+                                game_field.DrawImage(eight, x, y);
+                                eight.Dispose();
+                                break;
+                            }
+                        case 9:
+                            {
+                                Bitmap nine = new Bitmap(@"pictures\nine.bmp");
+                                game_field.DrawImage(nine, x, y);
+                                nine.Dispose();
+                                break;
+                            }
+                        case 10:
+                            {
+                                Bitmap ten = new Bitmap(@"pictures\ten.bmp");
+                                game_field.DrawImage(ten, x, y);
+                                ten.Dispose();
+                                break;
+                            }
+                        case 11:
+                            {
+                                Bitmap eleven = new Bitmap(@"pictures\eleven.bmp");
+                                game_field.DrawImage(eleven, x, y);
+                                eleven.Dispose();
+                                break;
+                            }
+                        case 12:
+                            {
+                                Bitmap twelve = new Bitmap(@"pictures\twelve.bmp");
+                                game_field.DrawImage(twelve, x, y);
+                                twelve.Dispose();
+                                break;
+                            }
+                        case 13:
+                            {
+                                Bitmap thirteen = new Bitmap(@"pictures\thirteen.bmp");
+                                game_field.DrawImage(thirteen, x, y);
+                                thirteen.Dispose();
+                                break;
+                            }
+                        case 14:
+                            {
+                                Bitmap fourteen = new Bitmap(@"pictures\fourteen.bmp");
+                                game_field.DrawImage(fourteen, x, y);
+                                fourteen.Dispose();
+                                break;
+                            }
+                        case 15:
+                            {
+                                Bitmap fifteen = new Bitmap(@"pictures\fifteen.bmp");
+                                game_field.DrawImage(fifteen, x, y);
+                                fifteen.Dispose();
+                                break;
+                            }
+                    }
+                }
+            }
             game_field.Dispose();
         }
 

@@ -11,9 +11,9 @@ namespace Spotnashki
     {
         clCreator Creator = new clCreator();//Create creator of game field
 
-        public int[] create(int[] field) //request to create new game field
+        public void create(int[,] field) //request to create new game field
         {
-            return Creator.create_field(field);//Recive new matrix-field and send it to clMain
+            Creator.create_field(field);//Recive new matrix-field and send it to clMain
         }
     }
 }
