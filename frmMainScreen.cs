@@ -161,7 +161,6 @@ namespace Spotnashki
         private void frmMainScreen_Load(object sender, EventArgs e)
         {
             first_draw();
-            MessageBox.Show("Все оке", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
