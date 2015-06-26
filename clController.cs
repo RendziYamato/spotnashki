@@ -13,14 +13,41 @@ namespace Spotnashki
 
         clAIPlayer AI = new clAIPlayer();
 
-        public void create(int[,] field) //request to create new game field
+        clMain Main = new clMain();//Main class wich will contain all information about game field: number of steps, status and field status
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        public void create() //request to create new game field
         {
-            Creator.create_field(field);//Recive new matrix-field and send it to clMain
+            Creator.create_field(Main.field);//Recive new matrix-field and send it to clMain
         }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         public void move(int[,] field, int move)
         {
-            Creator.change_position(field, move);
+            AI.change_position(field, move);
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        public string win_check()
+        {
+            return Main.win_check(AI.result);
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        public int[,] game_field()
+        {
+            return Main.field;
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        public int next_step()
+        {
+            return AI.ai_play(Main.field);
         }
     }
 }
