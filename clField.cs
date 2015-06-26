@@ -13,10 +13,10 @@ namespace Spotnashki
 
         int steps = 0; //Number of steps to win
 
-        int change_position(int move) //UNFINISHED
+        public int Steps
         {
-            return 1;
+            get { return steps; }
+            set { steps = value; }
         }
-
     }
 }

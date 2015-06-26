@@ -34,7 +34,7 @@
             this.panel = new System.Windows.Forms.Panel();
             this.label = new System.Windows.Forms.Label();
             this.Steps = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnStart
@@ -55,6 +55,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Выход";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel
             // 
@@ -84,6 +85,11 @@
             this.Steps.TabIndex = 5;
             this.Steps.Text = "0";
             // 
+            // timer
+            // 
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,7 +115,7 @@
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label Steps;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

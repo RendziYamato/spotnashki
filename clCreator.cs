@@ -47,5 +47,53 @@ namespace Spotnashki
                     }
                 }
         }
+
+
+        public void change_position(int[,] field, int move)
+        {
+            int time_variable, i = 0, j = 0;
+            bool flag;
+
+            for (i = 0, flag = false; i < 4 && flag == false; i++)
+                for (j = 0; j < 4 && flag == false; j++)
+                    if (field[i, j] == 0)
+                    {
+                        flag = true;
+                        i--;
+                        j--;
+                    }
+
+            switch (move)
+            {
+                case (int)Direction.up:
+                    {
+                        time_variable = field[i - 1, j];
+                        field[i - 1, j] = field[i, j];
+                        field[i, j] = time_variable;
+                        break;
+                    }
+                case (int)Direction.down:
+                    {
+                        time_variable = field[i + 1, j];
+                        field[i + 1, j] = field[i, j];
+                        field[i, j] = time_variable;
+                        break;
+                    }
+                case (int)Direction.left:
+                    {
+                        time_variable = field[i, j - 1];
+                        field[i, j - 1] = field[i, j];
+                        field[i, j] = time_variable;
+                        break;
+                    }
+                case (int)Direction.right:
+                    {
+                        time_variable = field[i, j + 1];
+                        field[i, j + 1] = field[i, j];
+                        field[i, j] = time_variable;
+                        break;
+                    }
+            }
+        }
     }
 }
