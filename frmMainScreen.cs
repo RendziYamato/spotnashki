@@ -15,8 +15,6 @@ namespace Spotnashki
 
     public partial class frmMainScreen : Form
     {
-        
-
         clController Controller = new clController();
         
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,10 +34,10 @@ namespace Spotnashki
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        //public void draw(int[,] array, int moving_object, int move)
         public void draw(int[,] array, int move)
         {
             Graphics game_field = this.panel.CreateGraphics();//For drawing game field
+
 
             for (int i = 0, y = 0; i < 4; i++)
             {
@@ -138,8 +136,7 @@ namespace Spotnashki
 
                     temp = new Bitmap(@"pictures\" + name + ".bmp");
 
-                    //if (array[i, j] == moving_object)
-                    if(move != (int)Direction.stay)
+                    if(move != (int)Direction.stay && name == "space")
                     {
                         Bitmap space = new Bitmap(@"pictures\space.bmp");
 
@@ -153,6 +150,7 @@ namespace Spotnashki
                                 {
                                     for (int a = 0; a <= 100; a++)
                                     {
+                                        
                                         timer.Enabled = true;
                                         game_field.DrawImage(space, x, y);
                                         game_field.DrawImage(space, x, y + 100);
@@ -246,17 +244,16 @@ namespace Spotnashki
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int direction = Controller.next_step();
-            draw(Controller.game_field(), direction);
-            Controller.move(Controller.game_field(), direction);
-            draw(Controller.game_field(), (int)Direction.stay);
-
+            while (Controller.win_check() != "In process...")
+            {
+                int direction = Controller.next_step();
+                draw(Controller.game_field(), direction);
+                Controller.move(Controller.game_field(), direction);
+                draw(Controller.game_field(), (int)Direction.stay);
+            }
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-        }
     }
 }

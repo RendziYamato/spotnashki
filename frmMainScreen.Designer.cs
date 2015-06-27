@@ -34,9 +34,9 @@
             this.panel = new System.Windows.Forms.Panel();
             this.lbSteps = new System.Windows.Forms.Label();
             this.lbSteps_value = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.lbStatus = new System.Windows.Forms.Label();
             this.lbStatus_value = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnStart
@@ -87,11 +87,6 @@
             this.lbSteps_value.TabIndex = 5;
             this.lbSteps_value.Text = "0";
             // 
-            // timer
-            // 
-            this.timer.Interval = 500;
-            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // lbStatus
             // 
             this.lbStatus.AutoSize = true;
@@ -140,9 +135,9 @@
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Label lbSteps;
         private System.Windows.Forms.Label lbSteps_value;
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.Label lbStatus_value;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

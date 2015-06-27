@@ -28,7 +28,11 @@ namespace Spotnashki
         public int ai_play(int[,] field)
         {
 
-            int current_token = completion_check(field);
+            int current_token = completion_check(field);//Check for completion of game, how equal 2 arrays: target and current
+
+            if (current_token == 99)//Check for end of game
+                return (int)Direction.stay;
+
             int result_x = 0, result_y = 0;
             int direction;
 
@@ -37,8 +41,9 @@ namespace Spotnashki
                 {
                     if (result[i, j] == current_token)
                     {
-                        result_x = i;
-                        result_y = j;
+                        result_x = j;
+                        result_y = i;
+                        i = j = 99;//to escape the cicle
                     }
                 }
 
@@ -48,38 +53,38 @@ namespace Spotnashki
                 {
                     if (field[i, j] == current_token)
                     {
-                        direction = manhattan_way(i, j, result_x, result_y);
+                        direction = manhattan_way(j, i, result_x, result_y);
 
-                        switch (direction)
+                        switch (direction)//Change coordinates of target to space token
                         {
                             case (int)Direction.up:
                                 {
-                                    result_y-=1;
+                                    result_y = i - 1;
                                     break;
                                 }
                             case (int)Direction.down:
                                 {
-                                    result_y+=1;
+                                    result_y = i + 1;
                                     break;
                                 }
                             case (int)Direction.left:
                                 {
-                                    result_x-=1;
+                                    result_x = j - 1;
                                     break;
                                 }
                             case (int)Direction.right:
                                 {
-                                    result_x+=1;
+                                    result_x = j + 1;
                                     break;
                                 }
                         }
                         
-                        for(int a = 0; a < 4; a++)
+                        for(int a = 0; a < 4; a++)//Search location of space token on field to move it
                             for (int b = 0; b < 4; b++)
                             {
                                 if (field[a, b] == 0)
                                 {
-                                    return manhattan_way(a, b, result_x, result_y);
+                                    return manhattan_way(b, a, result_x, result_y);
                                 }
                             }
                     }
@@ -152,17 +157,15 @@ namespace Spotnashki
 
         int completion_check(int[,] field)
         {
-            int current_token = 0;
-
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                 {
                     if (field[i, j] == result[i, j])
-                        current_token++;
+                        continue;
                     else
-                        return current_token;
+                        return result[i, j];
                 }
-            return current_token;
+            return 99;//if cicle is end and arrays is equal
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
