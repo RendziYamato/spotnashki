@@ -28,15 +28,73 @@ namespace Spotnashki
         public int ai_play(int[,] field)
         {
 
-            int current_token = completion_check(field);//Check for completion of game, how equal 2 arrays: target and current
+            //int current_token = completion_check(field);//Check for completion of game, how equal 2 arrays: target and current
 
-            if (current_token == 99)//Check for end of game
-                return (int)Direction.stay;
+            //if (current_token == 99)//Check for end of game
+            //    return (int)Direction.stay;
 
-            int result_x = 0, result_y = 0;
+            //int result_x = 0, result_y = 0;
+            //int direction;
+
+            //for(int i = 0; i < 4; i++)
+            //    for (int j = 0; j < 4; j++)
+            //    {
+            //        if (result[i, j] == current_token)
+            //        {
+            //            result_x = j;
+            //            result_y = i;
+            //            i = j = 99;//to escape the cicle
+            //        }
+            //    }
+
+
+            //for(int i = 0; i < 4; i++)
+            //    for (int j = 0; j < 4; j++)
+            //    {
+            //        if (field[i, j] == current_token)
+            //        {
+            //            direction = manhattan_way(j, i, result_x, result_y);
+
+            //            switch (direction)//Change coordinates of target to space token
+            //            {
+            //                case (int)Direction.up:
+            //                    {
+            //                        result_y = i - 1;
+            //                        break;
+            //                    }
+            //                case (int)Direction.down:
+            //                    {
+            //                        result_y = i + 1;
+            //                        break;
+            //                    }
+            //                case (int)Direction.left:
+            //                    {
+            //                        result_x = j - 1;
+            //                        break;
+            //                    }
+            //                case (int)Direction.right:
+            //                    {
+            //                        result_x = j + 1;
+            //                        break;
+            //                    }
+            //            }
+                        
+            //            for(int a = 0; a < 4; a++)//Search location of space token on field to move it
+            //                for (int b = 0; b < 4; b++)
+            //                {
+            //                    if (field[a, b] == 0)
+            //                    {
+            //                        return manhattan_way(b, a, result_x, result_y);
+            //                    }
+            //                }
+            //        }
+            //    }
+
+            int current_token = completion_check(field);
+            int result_x = 0, result_y = 0;//Coordinates field[2,3], were will be "snakes head"
             int direction;
 
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                 {
                     if (result[i, j] == current_token)
@@ -47,48 +105,66 @@ namespace Spotnashki
                     }
                 }
 
-
-            for(int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
-                {
-                    if (field[i, j] == current_token)
+            if (current_token != 10)
+            {
+                for (int i = 0; i < 4; i++)
+                    for (int j = 0; j < 4; j++)
                     {
-                        direction = manhattan_way(j, i, result_x, result_y);
-
-                        switch (direction)//Change coordinates of target to space token
+                        if (field[i, j] == current_token)
                         {
-                            case (int)Direction.up:
+                            open_close[i, j] = 'x';
+                            direction = manhattan_way(j, i, result_x, result_y);
+
+                            switch (direction)//Change coordinates of target to space token
+                            {
+                                case (int)Direction.up:
+                                    {
+                                        result_y = i - 1;
+                                        result_x = j;
+                                        break;
+                                    }
+                                case (int)Direction.down:
+                                    {
+                                        result_y = i + 1;
+                                        result_x = j;
+                                        break;
+                                    }
+                                case (int)Direction.left:
+                                    {
+                                        result_x = j - 1;
+                                        result_y = i;
+                                        break;
+                                    }
+                                case (int)Direction.right:
+                                    {
+                                        result_x = j + 1;
+                                        result_y = i;
+                                        break;
+                                    }
+                            }
+
+                            for(int a = 0; a < 4; a++)//Search location of space token on field to move it
+                                for (int b = 0; b < 4; b++)
                                 {
-                                    result_y = i - 1;
-                                    break;
-                                }
-                            case (int)Direction.down:
-                                {
-                                    result_y = i + 1;
-                                    break;
-                                }
-                            case (int)Direction.left:
-                                {
-                                    result_x = j - 1;
-                                    break;
-                                }
-                            case (int)Direction.right:
-                                {
-                                    result_x = j + 1;
-                                    break;
+                                    if (field[a, b] == 0)
+                                    {
+                                        if (b == result_x && a == result_y)
+                                        {
+                                            open_close[i, j] = 'o';
+                                            direction = manhattan_way(b, a, j, i);
+                                            open_close[i,j] = 'x';
+                                            return direction; 
+                                        }
+                                        else
+                                        {
+                                            return manhattan_way(b, a, result_x, result_y);
+                                        }
+                                    }    
                                 }
                         }
-                        
-                        for(int a = 0; a < 4; a++)//Search location of space token on field to move it
-                            for (int b = 0; b < 4; b++)
-                            {
-                                if (field[a, b] == 0)
-                                {
-                                    return manhattan_way(b, a, result_x, result_y);
-                                }
-                            }
                     }
-                }
+            }
+
             return (int)Direction.stay;
         }
 
@@ -101,7 +177,7 @@ namespace Spotnashki
                 best_weight = 99;
                                                                      
 
-            if (current_y - 1 >= 0 && open_close[current_x, current_y - 1] != 'x')
+            if (current_y - 1 >= 0 && open_close[current_y - 1, current_x] != 'x')
             {
                 current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y - 1, target_y));
                 if (best_weight > current_weight)
@@ -111,7 +187,7 @@ namespace Spotnashki
                 }
             }
 
-            if (current_y + 1 < 4 && open_close[current_x, current_y + 1] != 'x')
+            if (current_y + 1 < 4 && open_close[current_y + 1, current_x] != 'x')
             {
                 current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y + 1, target_y));
                 if (best_weight > current_weight)
@@ -121,7 +197,7 @@ namespace Spotnashki
                 }
             }
 
-            if (current_x - 1 >= 0 && open_close[current_x - 1, current_y] != 'x')
+            if (current_x - 1 >= 0 && open_close[current_y, current_x - 1] != 'x')
             {
                 current_weight = 10 * (modal_calculate(current_x - 1, target_x) + modal_calculate(current_y, target_y));
                 if (best_weight > current_weight)
@@ -131,7 +207,7 @@ namespace Spotnashki
                 }
             }
 
-            if (current_x + 1 < 4 && open_close[current_x + 1, current_y] != 'x')
+            if (current_x + 1 < 4 && open_close[current_y, current_x + 1] != 'x')
             {
                 current_weight = 10 * (modal_calculate(current_x + 1,target_x) + modal_calculate(current_y, target_y));
                 if (best_weight > current_weight)
@@ -175,11 +251,11 @@ namespace Spotnashki
             int time_variable, i = 0, j = 0;
             bool flag;
 
-            for (i = 0, flag = false; i < 4 && flag == false; i++)
+            for (i = 0, flag = false; i < 4 && flag == false; i++)//search space token
                 for (j = 0; j < 4 && flag == false; j++)
                     if (field[i, j] == 0)
                     {
-                        flag = true;
+                        flag = true;//for exit cicle
                         i--;
                         j--;
                     }
@@ -215,6 +291,13 @@ namespace Spotnashki
                         break;
                     }
             }
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        int snake_move(int[,] field)
+        {
+            return 1;
         }
     }
 }

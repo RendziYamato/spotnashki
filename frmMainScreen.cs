@@ -244,13 +244,13 @@ namespace Spotnashki
 
         private void button2_Click(object sender, EventArgs e)
         {
-            while (Controller.win_check() != "In process...")
-            {
+            //while (Controller.win_check() != "In process...")
+            //{
                 int direction = Controller.next_step();
                 draw(Controller.game_field(), direction);
                 Controller.move(Controller.game_field(), direction);
                 draw(Controller.game_field(), (int)Direction.stay);
-            }
+            //}
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
