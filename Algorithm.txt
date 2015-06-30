@@ -1,0 +1,95 @@
+int ai_player(int[,] field);
+{
+	int current_element_i = 0,
+	    current_element_j = 0,
+	    space_i = 0,
+	    space_j = 0,
+	    target_i = 0,
+	    target_j = 0,
+	    direction = 0;
+	
+	current_element_check(&current_element_i, &current_element_j, &target_i, &target_j, field);		//Поиск следующей по порядку фишки не на своем месте
+	void current_element_check( int *current_element_i, int *current_element_j, int *target_i, int *target_j, int[i,j] field)
+	{
+		for(int i = 0, i < 4; i++)
+			for(int j =  0; j < 4; j++)
+				if(field[i,j] == result_array[i,j])
+					open_close[i,j] = 'x';
+				else
+					if(result_array[i,j] == 0)
+						return;
+					else
+					{			
+						target_i = i;
+						target_j = j;
+						i = 99;
+						j = 99;
+					}		
+				}
+
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 4; j++)
+				if(field[i,j] == result_array[target_i, target_j])
+				{
+					current_element_i = i;
+					current_element_j = j;
+					i = 99;
+					j = 99;
+				}
+	}
+
+	find_space(&space_i, &space_j, field);			//Поиск пустой фишки
+	void find_space(int *space_i, int *space_j, int[,] field)
+	{
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 4; j++)
+				if(field[i,j] == 0)
+				{
+					space_i = i;
+					space_j = j;
+					break;
+				}
+		
+	}
+
+	if(result[current_elemen_i, current_element_j] == 0)
+		return (int)Direction.Stay;
+	
+	if(queue_space_check() == "not empty")
+		return queue_space_next();		//Извлекаем из очереди следующее направление движения пустой фишки
+	else
+		if(queue_element_check() == "not empty")
+		{
+			direction = queue_element_next(); //Следующий элемент в очереди направлений для текущего элемента
+			target_i = current_element_i;
+			target_j = current_element_j;
+			to_coordinates_i(&target_i, &target_j, direction);//НАПИСАТЬ ФУНКЦИЮ преобразовывающие направление в координаты
+			
+			find_a_way(space_i, space_j, target_i, target_j, field, "space");//Запускаем функцию рекурсивного поиска пути в глубину и по завершению загружаем в очередь направления движения для пустой фишки в обратном порядке, для того чтобы функция поняла, что это для пустой фишки пишем строку "спейс"
+			
+			if(queue_space_check() == "not empty")
+				return queue_space_next();//Возвращаем первый элемент в очереди направлений для пустой фишки
+			else
+				//WTF?!!
+		}
+		else//Просто вставил, не проверял
+		{
+			find_a_way(current_element_i, current_element_j, target_i, target_j, field, "element");//Запускаем функцию для рекурсивного поиска пути в глубину массива и по завершению поиска загружаем результаты в очередь направлений дивжения для элемента, чтобы функция поняла, что это для элемента отправляем функции строку "элемент"
+			
+			if(queue_element_check() == "not empty")
+			{
+				direction = queue_element_next(); //Следующий элемент в очереди направлений для текущего элемента
+			target_i = current_element_i;
+			target_j = current_element_j;
+			to_coordinates_i(&target_i, &target_j, direction);//НАПИСАТЬ ФУНКЦИЮ преобразовывающие направление в координаты
+			
+			find_a_way(space_i, space_j, target_i, target_j, field, "space");//Запускаем функцию рекурсивного поиска пути в глубину и по завершению загружаем в очередь направления движения для пустой фишки в обратном порядке, для того чтобы функция поняла, что это для пустой фишки пишем строку "спейс"
+			
+			if(queue_space_check() == "not empty")
+				return queue_space_next();
+			}
+				
+		}
+
+	
+	

@@ -152,7 +152,6 @@ namespace Spotnashki
                                         {
                                             open_close[i, j] = 'o';
                                             direction = manhattan_way(b, a, j, i);
-                                            open_close[i,j] = 'x';
                                             return direction; 
                                         }
                                         else
@@ -175,11 +174,12 @@ namespace Spotnashki
             int direction = 0,       //values wich willn't conflict with progam
                 current_weight = 99, //weigth is priority for move in that location
                 best_weight = 99;
-                                                                     
+            
+                                                         
 
             if (current_y - 1 >= 0 && open_close[current_y - 1, current_x] != 'x')
             {
-                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y - 1, target_y));
+                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y - 1, target_y)) + check_next_step(current_x, current_y - 1, target_x, target_y);
                 if (best_weight > current_weight)
                 {
                     best_weight = current_weight;
@@ -189,7 +189,7 @@ namespace Spotnashki
 
             if (current_y + 1 < 4 && open_close[current_y + 1, current_x] != 'x')
             {
-                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y + 1, target_y));
+                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y + 1, target_y)) + check_next_step(current_x, current_y + 1, target_x, target_y);
                 if (best_weight > current_weight)
                 {
                     best_weight = current_weight;
@@ -199,7 +199,7 @@ namespace Spotnashki
 
             if (current_x - 1 >= 0 && open_close[current_y, current_x - 1] != 'x')
             {
-                current_weight = 10 * (modal_calculate(current_x - 1, target_x) + modal_calculate(current_y, target_y));
+                current_weight = 10 * (modal_calculate(current_x - 1, target_x) + modal_calculate(current_y, target_y)) + check_next_step(current_x - 1, current_y, target_x, target_y);
                 if (best_weight > current_weight)
                 {
                     best_weight = current_weight;
@@ -209,7 +209,7 @@ namespace Spotnashki
 
             if (current_x + 1 < 4 && open_close[current_y, current_x + 1] != 'x')
             {
-                current_weight = 10 * (modal_calculate(current_x + 1,target_x) + modal_calculate(current_y, target_y));
+                current_weight = 10 * (modal_calculate(current_x + 1, target_x) + modal_calculate(current_y, target_y)) + check_next_step(current_x + 1, current_y, target_x, target_y);
                 if (best_weight > current_weight)
                 {
                     best_weight = current_weight;
@@ -217,6 +217,46 @@ namespace Spotnashki
                 }
             }
             return direction;//Return best direction to move to target location
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        int check_next_step(int current_x,int current_y,int target_x,int target_y)
+        {
+            int current_weight = 99, //weigth is priority for move in that location
+                best_weight = 99;                                            
+
+            if (current_y - 1 >= 0 && open_close[current_y - 1, current_x] != 'x')
+            {
+                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y - 1, target_y));
+       
+                if (best_weight > current_weight)
+                    best_weight = current_weight;
+
+            }
+
+            if (current_y + 1 < 4 && open_close[current_y + 1, current_x] != 'x')
+            {
+                current_weight = 10 * (modal_calculate(current_x, target_x) + modal_calculate(current_y + 1, target_y));
+                if (best_weight > current_weight)
+                    best_weight = current_weight;
+            }
+
+            if (current_x - 1 >= 0 && open_close[current_y, current_x - 1] != 'x')
+            {
+                current_weight = 10 * (modal_calculate(current_x - 1, target_x) + modal_calculate(current_y, target_y));
+                if (best_weight > current_weight)
+                    best_weight = current_weight;
+            }
+
+            if (current_x + 1 < 4 && open_close[current_y, current_x + 1] != 'x')
+            {
+                current_weight = 10 * (modal_calculate(current_x + 1,target_x) + modal_calculate(current_y, target_y));
+                if (best_weight > current_weight)
+                    best_weight = current_weight;
+            }
+
+            return best_weight;
         }
         
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,7 +277,7 @@ namespace Spotnashki
                 for (int j = 0; j < 4; j++)
                 {
                     if (field[i, j] == result[i, j])
-                        continue;
+                        open_close[i, j] = 'x';
                     else
                         return result[i, j];
                 }
