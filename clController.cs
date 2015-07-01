@@ -33,7 +33,7 @@ namespace Spotnashki
 
         public string win_check()
         {
-            return Main.win_check(AI.result);
+            return Main.win_check(AI.result_array);
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,7 +47,7 @@ namespace Spotnashki
 
         public int next_step()
         {
-            return AI.ai_play(Main.field);
+            return AI.ai_play(Main.field, Main.open_close);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Spotnashki
     {
         public int[,] field;//Game field array
 
+        public char[,] open_close;
+
         int steps; //Number of steps to win
 
         public string win;//String wich contain game status
@@ -22,6 +24,11 @@ namespace Spotnashki
             field = new int[4, 4];
             steps = 0;
             win = "In process...";
+
+            open_close = new char[4, 4];
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    open_close[i, j] = ' ';
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
