@@ -19,7 +19,7 @@ namespace Spotnashki
 
         public clMain()//Constructor
         {
-            field = new int[4, 4];
+            field = new int[(int)MaxArraySize.x, (int)MaxArraySize.y] { { 1, 2, 3, 7 }, { 12, 8, 0, 4 }, { 9, 5, 15, 6 }, { 13, 11, 14, 10 } };
             steps = 0;
             win = "In process...";
         }
@@ -38,8 +38,8 @@ namespace Spotnashki
         {
             bool flag = false;
 
-            for(int i = 0; i < 4 && flag == false; i++)
-                for (int j = 0; j < 4 && flag == false; j++)
+            for (int i = 0; i < (int)MaxArraySize.x && flag == false; i++)
+                for (int j = 0; j < (int)MaxArraySize.y && flag == false; j++)
                 {
                     if (field[i, j] == result[i, j])
                         continue;

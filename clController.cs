@@ -33,7 +33,7 @@ namespace Spotnashki
 
         public string win_check()
         {
-            return Main.win_check(AI.result);
+            return Main.win_check(AI.result_array);
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

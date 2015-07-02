@@ -11,7 +11,8 @@ using System.Resources;
 
 namespace Spotnashki
 {
-    enum Direction { up = 1, down, left, right, stay };
+    enum Direction { up = 1, down = 2, left = 3, right = 4, stay = 5 };
+    enum MaxArraySize { x = 4, y = 4 };
 
     public partial class frmMainScreen : Form
     {
@@ -39,11 +40,11 @@ namespace Spotnashki
             Graphics game_field = this.panel.CreateGraphics();//For drawing game field
 
 
-            for (int i = 0, y = 0; i < 4; i++)
+            for (int i = 0, y = 0; i < (int)MaxArraySize.x; i++)
             {
                 y = i * 100;
 
-                for (int j = 0, x = 0; j < 4; j++)
+                for (int j = 0, x = 0; j < (int)MaxArraySize.y; j++)
                 {
                     Bitmap temp;
                     string name = " ";
